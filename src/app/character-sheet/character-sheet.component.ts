@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CharacterSheet } from './character-sheet.model';
 import { environment } from 'src/environments/environment';
+import { Character } from './character.model';
+import { CharacterSheetService } from './character-sheet.service';
 
 @Component({
   selector: 'app-character-sheet',
@@ -9,13 +10,23 @@ import { environment } from 'src/environments/environment';
 })
 export class CharacterSheetComponent implements OnInit {
 
-  private character: CharacterSheet = new CharacterSheet('Jim', '8', 'male_aumaua_b_lg.png');
+  private character: Character;
 
-  private portraitURL = environment.restURL + '/image?portraitFileName=' + this.character.portrait;
+  private portraitURL = environment.restURL + '/image?portraitFileName=';
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private service: CharacterSheetService) {
+    this.getCharacter();
+    
   }
 
+  ngOnInit() {
+    
+  }
+
+  getCharacter() {
+    this.service.getCharacter().subscribe(character =>{
+      this.character = character;
+      this.portraitURL = this.portraitURL + this.character.portrait;
+    })
+  }
 }

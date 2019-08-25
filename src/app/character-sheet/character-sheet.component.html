@@ -1,4 +1,7 @@
-<h2>Name: {{character.name}}</h2>
-<img src = "{{portraitURL}}"/> <br/>
-<p>Agility: {{character.agility}}</p>
-<app-dice-roll></app-dice-roll>
+<div *ngIf="character">
+    <h2>Name: {{character.name}}</h2>
+    <img src = "{{portraitURL}}"/> <br/>
+    <p></p>
+    <app-dice-roll></app-dice-roll>
+
+</div>
