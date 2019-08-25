@@ -8,7 +8,9 @@ import { DiceRollService } from './dice-roll.service';
   styleUrls: ['./dice-roll.component.css']
 })
 export class DiceRollComponent implements OnInit {
-  roll: string;
+  private roll: string;
+
+  private sides: number = 20;
 
   ngOnInit() {}
 
@@ -16,7 +18,7 @@ export class DiceRollComponent implements OnInit {
    }
 
    getDiceRoll() {
-     this.service.getDiceRoll().subscribe(roll => {
+     this.service.getDiceRoll(this.sides).subscribe(roll => {
        this.roll = roll;
       });
     }

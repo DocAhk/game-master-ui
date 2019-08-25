@@ -1,6 +1,8 @@
 import { Injectable , Component} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -8,11 +10,14 @@ import { Observable } from 'rxjs';
 })
 
 export class DiceRollService {
-    private url: string = 'http://localhost:8080/diceRoll';
+    private url: string = environment.restURL + '/diceRoll';
 
     constructor(private http: HttpClient) { }
 
-    getDiceRoll(): Observable<string> {
+    getDiceRoll(sides?: number): Observable<string> {
+        if(typeof sides != 'undefined') {
+            return this.http.get<string>(this.url + '?sides=' + sides);
+        }
         return this.http.get<string>(this.url);
     }
 }
