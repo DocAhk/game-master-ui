@@ -1,7 +1,8 @@
 <div *ngIf="character">
     <h2>Name: {{character.name}}</h2>
+    <h2>Level: {{character.level}}</h2>
     <img src = "{{portraitURL}}"/> <br/>
-    <p></p>
+    <p *ngFor="let stat of character.stats">{{stat.name}}: {{stat.effectiveLevel}}</p>
     <app-dice-roll></app-dice-roll>
 
 </div>
